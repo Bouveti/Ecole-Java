@@ -5,13 +5,15 @@ public class Inscription {
 	private int eleve;
 	private int module;
 	private String role;
+	private int state;
 	
-	public Inscription(int id, int eleve, int module, String role) {
+	public Inscription(int id, int eleve, int module, String role,int state) {
 		super();
 		this.id = id;
 		this.eleve = eleve;
 		this.module = module;
 		this.role = role;
+		this.state = state;
 	}
 
 	public int getId() {
@@ -44,5 +46,13 @@ public class Inscription {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
 	}
 }

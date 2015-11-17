@@ -23,10 +23,52 @@ public class InscriptionDAO {
 			Inscription.setRole(DBAction.getRes().getString(4));
 			
 			listInscription.add(new Inscription(Inscription.getId(),Inscription.getEleve(),
-					Inscription.getModule(),Inscription.getRole()));
+					Inscription.getModule(),Inscription.getRole(),0));
 		}
 		DBAction.DBClose();		
 		return listInscription;		
 	}
+	
+	public static int insertInscription(Inscription inscription){
+			
+			int result = -1;
+			DBAction.DBConnexion();
+			
+			String req = "INSERT INTO INSCRIPTION (ID, ELEVE_IDELEVE, MODULE_IDMODULE, ROLE)VALUES("+ inscription.getId()+","
+																									+ inscription.getEleve()+","
+																									+ inscription.getModule()+","
+																									+ "\""+inscription.getRole()+"\");";
+			 
+			try {
+					result = DBAction.getStm().executeUpdate(req);
+					System.out.println("Requete executee");
+				 
+				} catch (SQLException ex) {
+					result = - ex.getErrorCode();
+				}
+			DBAction.DBClose();
+			
+			return result;
+		}
+		
+		public static int deleteEtudiantById(Inscription inscription) {
+			
+			int result = -1;
+			DBAction.DBConnexion();
+			 
+			String req = "DELETE FROM Inscription WHERE ID =" + inscription.getId()+";";
+			
+			try {
+					result = DBAction.getStm().executeUpdate(req);
+					System.out.println("Requete executee");
+				 
+				} catch (SQLException ex) {
+					result = - ex.getErrorCode();
+				}
+			
+			DBAction.DBClose();
+			
+			return result;
+		}
 
 }
