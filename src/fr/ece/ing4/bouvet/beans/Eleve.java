@@ -3,10 +3,10 @@ package fr.ece.ing4.bouvet.beans;
 public class Eleve {
 	private int id;
 	private String nom;
-	private Professeur professeur;
-	private Specialite specialite;
+	private int professeur;
+	private int specialite;
 	
-	public Eleve(int id, String nom, Professeur professeur, Specialite specialite) {
+	public Eleve(int id, String nom, int professeur, int specialite) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -26,16 +26,16 @@ public class Eleve {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public Professeur getProfesseur() {
+	public int getProfesseur() {
 		return professeur;
 	}
-	public void setProfesseur(Professeur professeur) {
+	public void setProfesseur(int professeur) {
 		this.professeur = professeur;
 	}
-	public Specialite getSpecialite() {
+	public int getSpecialite() {
 		return specialite;
 	}
-	public void setSpecialite(Specialite specialite) {
+	public void setSpecialite(int specialite) {
 		this.specialite = specialite;
 	}	
 }

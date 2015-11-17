@@ -2,10 +2,10 @@ package fr.ece.ing4.bouvet.beans;
 
 public class Inscription {
 	private int id;
-	private Eleve eleve;
-	private Module module;
+	private int eleve;
+	private int module;
 	
-	public Inscription(int id, Eleve eleve, Module module) {
+	public Inscription(int id, int eleve, int module) {
 		super();
 		this.id = id;
 		this.eleve = eleve;
@@ -20,19 +20,19 @@ public class Inscription {
 		this.id = id;
 	}
 
-	public Eleve getEleve() {
+	public int getEleve() {
 		return eleve;
 	}
 
-	public void setEleve(Eleve eleve) {
+	public void setEleve(int eleve) {
 		this.eleve = eleve;
 	}
 
-	public Module getModule() {
+	public int getModule() {
 		return module;
 	}
 
-	public void setModule(Module module) {
+	public void setModule(int module) {
 		this.module = module;
 	}
 }

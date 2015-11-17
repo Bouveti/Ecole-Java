@@ -3,10 +3,10 @@ package fr.ece.ing4.bouvet.beans;
 public class Professeur {
 	private int id;
 	private String nom;
-	private Module module;
-	private Specialite specialite;
+	private int module;
+	private int specialite;
 	
-	public Professeur(int id, String nom, Module module, Specialite specialite) {
+	public Professeur(int id, String nom, int module, int specialite) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -26,16 +26,16 @@ public class Professeur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public Module getModule() {
+	public int getModule() {
 		return module;
 	}
-	public void setModule(Module module) {
+	public void setModule(int module) {
 		this.module = module;
 	}
-	public Specialite getSpecialite() {
+	public int getSpecialite() {
 		return specialite;
 	}
-	public void setSpecialite(Specialite specialite) {
+	public void setSpecialite(int specialite) {
 		this.specialite = specialite;
 	}
 	

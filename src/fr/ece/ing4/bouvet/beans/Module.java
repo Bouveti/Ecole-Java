@@ -3,9 +3,9 @@ package fr.ece.ing4.bouvet.beans;
 public class Module {
 	private int id;
 	private String nom;
-	private Specialite specialite;
+	private int specialite;
 	
-	public Module(int id, String nom, Specialite specialite) {
+	public Module(int id, String nom, int specialite) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -28,11 +28,11 @@ public class Module {
 		this.nom = nom;
 	}
 
-	public Specialite getSpecialite() {
+	public int getSpecialite() {
 		return specialite;
 	}
 
-	public void setSpecialite(Specialite specialite) {
+	public void setSpecialite(int specialite) {
 		this.specialite = specialite;
 	}
 }
