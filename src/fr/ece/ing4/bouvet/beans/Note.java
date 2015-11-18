@@ -17,6 +17,10 @@ public class Note {
 		this.type = type;
 		this.coefficient = coefficient;
 	}
+	
+	public Note(){
+		this(0,0,0,0,"",0.0f);
+	}
 
 	public int getId() {
 		return id;

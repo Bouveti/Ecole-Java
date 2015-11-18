@@ -11,6 +11,10 @@ public class Module {
 		this.nom = nom;
 		this.specialite = specialite;
 	}
+	
+	public Module(){
+		this(0,"",0);
+	}
 
 	public int getId() {
 		return id;

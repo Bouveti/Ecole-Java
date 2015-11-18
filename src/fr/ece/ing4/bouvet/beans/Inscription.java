@@ -15,6 +15,10 @@ public class Inscription {
 		this.role = role;
 		this.state = state;
 	}
+	
+	public Inscription(){
+		this(0,0,0,"",0);
+	}
 
 	public int getId() {
 		return id;

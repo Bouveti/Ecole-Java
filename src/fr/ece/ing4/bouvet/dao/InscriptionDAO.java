@@ -9,21 +9,25 @@ import fr.ece.ing4.bouvet.connection.DBAction;
 public class InscriptionDAO {
 	
 	private static ArrayList<Inscription> listInscription;
-	private static Inscription Inscription;
+	private static Inscription inscription;
 	
 	public static ArrayList<Inscription> getAllInscription() throws SQLException{
+		
+		listInscription = new ArrayList<Inscription>();
+		inscription = new Inscription();
+		
 		String req ="SELECT * FROM Inscription;";
 		DBAction.DBConnexion();
 		DBAction.setRes(DBAction.getStm().executeQuery(req));
 		while (DBAction.getRes().next())
 		{
-			Inscription.setId(DBAction.getRes().getInt(1));
-			Inscription.setEleve(DBAction.getRes().getInt(2));
-			Inscription.setModule(DBAction.getRes().getInt(3));
-			Inscription.setRole(DBAction.getRes().getString(4));
+			inscription.setId(DBAction.getRes().getInt(1));
+			inscription.setEleve(DBAction.getRes().getInt(2));
+			inscription.setModule(DBAction.getRes().getInt(3));
+			inscription.setRole(DBAction.getRes().getString(4));
 			
-			listInscription.add(new Inscription(Inscription.getId(),Inscription.getEleve(),
-					Inscription.getModule(),Inscription.getRole(),0));
+			listInscription.add(new Inscription(inscription.getId(),inscription.getEleve(),
+					inscription.getModule(),inscription.getRole(),0));
 		}
 		DBAction.DBClose();		
 		return listInscription;		

@@ -14,6 +14,10 @@ public class Eleve {
 		this.specialite = specialite;
 	}
 	
+	public Eleve(){
+		this(0,"",0,0);
+	}
+	
 	public int getId() {
 		return id;
 	}

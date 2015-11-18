@@ -14,6 +14,10 @@ public class Professeur {
 		this.specialite = specialite;
 	}
 	
+	public Professeur(){
+		this(0,"",0,0);
+	}
+	
 	public int getId() {
 		return id;
 	}

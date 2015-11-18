@@ -9,21 +9,25 @@ import fr.ece.ing4.bouvet.connection.DBAction;
 public class ProfesseurDAO {
 	
 	private static ArrayList<Professeur> listProfesseur;
-	private static Professeur Professeur;
+	private static Professeur professeur;
 	
 	public static ArrayList<Professeur> getAllProfesseur() throws SQLException{
+		
+		listProfesseur = new ArrayList<Professeur>();
+		professeur = new Professeur();
+		
 		String req ="SELECT * FROM Professeur;";
 		DBAction.DBConnexion();
 		DBAction.setRes(DBAction.getStm().executeQuery(req));
 		while (DBAction.getRes().next())
 		{
-			Professeur.setId(DBAction.getRes().getInt(1));
-			Professeur.setModule(DBAction.getRes().getInt(2));
-			Professeur.setSpecialite(DBAction.getRes().getInt(3));
-			Professeur.setNom(DBAction.getRes().getString(4));
+			professeur.setId(DBAction.getRes().getInt(1));
+			professeur.setModule(DBAction.getRes().getInt(2));
+			professeur.setSpecialite(DBAction.getRes().getInt(3));
+			professeur.setNom(DBAction.getRes().getString(4));
 			
-			listProfesseur.add(new Professeur(Professeur.getId(),Professeur.getNom(),
-					Professeur.getModule(),Professeur.getSpecialite()));
+			listProfesseur.add(new Professeur(professeur.getId(),professeur.getNom(),
+					professeur.getModule(),professeur.getSpecialite()));
 		}
 		DBAction.DBClose();		
 		return listProfesseur;		

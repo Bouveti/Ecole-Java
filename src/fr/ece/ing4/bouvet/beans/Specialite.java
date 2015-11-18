@@ -9,6 +9,10 @@ public class Specialite {
 		this.id = id;
 		this.nom = nom;
 	}
+	
+	public Specialite(){
+		this(0,"");
+	}
 
 	public int getId() {
 		return id;

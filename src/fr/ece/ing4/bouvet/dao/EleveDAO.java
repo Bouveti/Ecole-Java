@@ -12,6 +12,10 @@ public class EleveDAO {
 	private static Eleve eleve;
 	
 	public static ArrayList<Eleve> getAllEleve() throws SQLException{
+		
+		listEleve = new ArrayList<Eleve>();
+		eleve = new Eleve();
+		
 		String req ="SELECT * FROM ELEVE;";
 		DBAction.DBConnexion();
 		DBAction.setRes(DBAction.getStm().executeQuery(req));
