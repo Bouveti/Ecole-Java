@@ -1,6 +1,10 @@
 package fr.ece.ing4.bouvet.beans;
 
-public class Utilisateur {
+import java.io.Serializable;
+
+public class Utilisateur implements Serializable {
+	
+	private static final String className="Utilisateur";
 	private int id;
 	private String nom;
 	private String login;
@@ -16,6 +20,11 @@ public class Utilisateur {
 	
 	public Utilisateur(){
 		this(0,"","","");
+	}
+	
+	public String toString(){
+		return this.className+"_"+this.id + "_" + this.nom + "_" + this.login + 
+				"_" + this.password;
 	}
 	
 	public int getId() {
