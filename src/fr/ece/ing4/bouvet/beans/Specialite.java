@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Specialite implements Serializable {
 	
-	private static final String className="ProfesseurClass";
+	private static final String className="SpecialiteClass";
 	private int id;
 	private String nom;
 	

@@ -67,6 +67,7 @@ public class Client {
 				} else if (resFull[i].equalsIgnoreCase("SpecialiteClass")) {
 					listSpecialite.add(new Specialite(Integer.parseInt(resFull[i + 1]), resFull[i + 2]));
 				} else if (resFull[i].equalsIgnoreCase("UtilisateurClass")) {
+					System.out.println(resFull[i + 1]+" "+resFull[i + 2]+" "+resFull[i + 3]+" "+resFull[i + 4]+" /");
 					listUtilisateur.add(new Utilisateur(Integer.parseInt(resFull[i + 1]), resFull[i + 2],
 							resFull[i + 3], resFull[i + 4]));
 				}
