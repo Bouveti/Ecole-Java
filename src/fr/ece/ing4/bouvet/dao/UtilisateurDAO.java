@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import fr.ece.ing4.bouvet.beans.*;
 import fr.ece.ing4.bouvet.connection.DBAction;
-import com.mysql.jdbc.SQLError;
 
 public class UtilisateurDAO {
 

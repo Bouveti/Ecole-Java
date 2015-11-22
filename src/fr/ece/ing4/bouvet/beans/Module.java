@@ -3,7 +3,6 @@ package fr.ece.ing4.bouvet.beans;
 import java.io.Serializable;
 
 public class Module implements Serializable {
-	
 	private static final String className="ModuleClass";
 	private int id;
 	private String nom;
@@ -21,7 +20,7 @@ public class Module implements Serializable {
 	}
 	
 	public String toString(){
-		return this.className+"_"+this.id + "_" + this.nom + "_" + this.specialite;
+		return Module.className+"_"+this.id + "_" + this.nom + "_" + this.specialite;
 	}
 
 	public int getId() {

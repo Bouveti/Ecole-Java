@@ -3,8 +3,11 @@ package fr.ece.ing4.bouvet.beans;
 import java.io.Serializable;
 
 public class Specialite implements Serializable {
-	
-	private static final String className="ProfesseurClass";
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final String className="SpecialiteClass";
 	private int id;
 	private String nom;
 	
@@ -18,7 +21,7 @@ public class Specialite implements Serializable {
 		this(0,"");
 	}
 	public String toString(){
-		return this.className+"_"+this.id + "_" + this.nom;
+		return Specialite.className+"_"+this.id + "_" + this.nom;
 	}
 
 	public int getId() {

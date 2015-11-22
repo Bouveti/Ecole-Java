@@ -3,7 +3,6 @@ package fr.ece.ing4.bouvet.beans;
 import java.io.Serializable;
 
 public class Note implements Serializable {
-	
 	private static final String className="NoteClass";
 	private int id;
 	private int eleve;
@@ -27,7 +26,7 @@ public class Note implements Serializable {
 	}
 	
 	public String toString(){
-		return this.className+"_"+this.id + "_" + this.eleve + "_" + this.module
+		return Note.className+"_"+this.id + "_" + this.eleve + "_" + this.module
 				+"_"+this.note + "_" + this.type + "_" + this.coefficient;
 	}
 

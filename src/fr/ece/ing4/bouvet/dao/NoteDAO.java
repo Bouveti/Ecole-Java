@@ -3,7 +3,6 @@ package fr.ece.ing4.bouvet.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import fr.ece.ing4.bouvet.beans.Inscription;
 import fr.ece.ing4.bouvet.beans.Note;
 import fr.ece.ing4.bouvet.connection.DBAction;
 

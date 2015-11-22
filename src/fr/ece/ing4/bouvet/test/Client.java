@@ -18,8 +18,6 @@ import java.io.*;
 public class Client {
 
 	public static void main(String[] args) throws ClassNotFoundException {
-		// TODO Auto-generated method stub
-
 		Socket socket;
 		String res;
 		String[] resFull;
@@ -34,11 +32,14 @@ public class Client {
 		ArrayList<Utilisateur> listUtilisateur = new ArrayList<Utilisateur>();
 
 		try {
-			socket = new Socket(InetAddress.getLocalHost(),2009);
+			//Création de la socketClient
+			socket = new Socket(InetAddress.getLocalHost(),3500);
 			InputStream is= socket.getInputStream();
 			ois = new ObjectInputStream(is);
+			//Récupération + désérialisation
 			res=(String)ois.readObject().toString();
 			System.out.println(res);
+			//Séparation des valeurs
 			res = res.replaceAll("]", "");
 			res = res.replaceAll("\\[", "");
 			res = res.replaceAll(" ", "");
@@ -46,6 +47,7 @@ public class Client {
 			/*for (String resF : resFull) {				
 				System.out.println(resF);
 			}*/
+			//Création des objets dans les arrayList
 			for(int i=0;i<resFull.length;i++)
 			{
 				if(resFull[i].equalsIgnoreCase("EleveClass"))
@@ -55,61 +57,49 @@ public class Client {
 				}
 				else if(resFull[i].equalsIgnoreCase("InscriptionClass"))
 				{
-					listInscription.add(new Inscription(Integer.parseInt(resFull[i+1]), Integer.parseInt(resFull[i+2]),
-							Integer.parseInt(resFull[i+3]), resFull[i+4], Integer.parseInt(resFull[i+5])));
+					listInscription.add(new Inscription(Integer.parseInt(resFull[i+1]),
+							Integer.parseInt(resFull[i+2]),
+							Integer.parseInt(resFull[i+3]),
+							resFull[i+4],
+							Integer.parseInt(resFull[i+5])));
 				}
 				else if(resFull[i].equalsIgnoreCase("ModuleClass"))
 				{
-					listModule.add(new Module(Integer.parseInt(resFull[i+1]), resFull[i+2],
+					listModule.add(new Module(Integer.parseInt(resFull[i+1]),
+							resFull[i+2],
 							Integer.parseInt(resFull[i+3])));
 				}
 				else if(resFull[i].equalsIgnoreCase("NoteClass"))
 				{
-					listNote.add(new Note(Integer.parseInt(resFull[i+1]), Integer.parseInt(resFull[i+2]),
-							Integer.parseInt(resFull[i+3]), Integer.parseInt(resFull[i+4]),
-							resFull[i+5], Float.parseFloat(resFull[i+6])));
+					listNote.add(new Note(Integer.parseInt(resFull[i+1]),
+							Integer.parseInt(resFull[i+2]),
+							Integer.parseInt(resFull[i+3]),
+							Integer.parseInt(resFull[i+4]),
+							resFull[i+5],
+							Float.parseFloat(resFull[i+6])));
 				}
 				else if(resFull[i].equalsIgnoreCase("ProfesseurClass"))
 				{
-					listProfesseur.add(new Professeur(Integer.parseInt(resFull[i+1]), resFull[i+2],
-							Integer.parseInt(resFull[i+3]), Integer.parseInt(resFull[i+4])));
+					listProfesseur.add(new Professeur(Integer.parseInt(resFull[i+1]),
+							resFull[i+2], 
+							Integer.parseInt(resFull[i+3]), 
+							Integer.parseInt(resFull[i+4])));
 				}
 				else if(resFull[i].equalsIgnoreCase("SpecialiteClass"))
 				{
-					listSpecialite.add(new Specialite(Integer.parseInt(resFull[i+1]), resFull[i+2]));
+					listSpecialite.add(new Specialite(Integer.parseInt(resFull[i+1]),
+							resFull[i+2]));
 				}
 				else if(resFull[i].equalsIgnoreCase("UtilisateurClass"))
 				{
-					listUtilisateur.add(new Utilisateur(Integer.parseInt(resFull[i+1]), resFull[i+2],
-							resFull[i+3], resFull[i+4]));
+					listUtilisateur.add(new Utilisateur(Integer.parseInt(resFull[i+1]),
+							resFull[i+2],
+							resFull[i+3],
+							resFull[i+4]));
 				}
 			}
-
-			//Utilisateur user2 = new Utilisateur(Integer.parseInt(resFull[0]), resFull[1], resFull[2], resFull[3]);
-			
-
-			//System.out.println((Utilisateur)ois.readObject());
-
-
-			//ObjectInputStream ois = new ObjectInputStream(is);
-			/*ois = new ObjectInputStream(
-						new BufferedInputStream(
-								new FileInputStream(
-										new File("game.txt"))));
-
-				try {
-					System.out.println("Affichage de l'user :");
-					System.out.println("*************************\n");
-					System.out.println(ois.readObject().toString());
-
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-
-				ois.close();*/
+			//Fermeture de la socket
 			socket.close();
-
-
 		}catch (UnknownHostException e) {
 
 			e.printStackTrace();
@@ -117,7 +107,5 @@ public class Client {
 
 			e.printStackTrace();
 		}
-
 	}
-
 }

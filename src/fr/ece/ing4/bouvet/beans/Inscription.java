@@ -3,7 +3,6 @@ package fr.ece.ing4.bouvet.beans;
 import java.io.Serializable;
 
 public class Inscription implements Serializable {
-	
 	private static final String className="InscriptionClass";
 	private int id;
 	private int eleve;
@@ -25,7 +24,7 @@ public class Inscription implements Serializable {
 	}
 	
 	public String toString(){
-		return this.className+"_"+this.id + "_" + this.eleve + "_" + this.module+ 
+		return Inscription.className+"_"+this.id + "_" + this.eleve + "_" + this.module+ 
 				"_" + this.role + "_" + this.state;
 	}
 

@@ -3,7 +3,6 @@ package fr.ece.ing4.bouvet.beans;
 import java.io.Serializable;
 
 public class Utilisateur implements Serializable {
-	
 	private static final String className="UtilisateurClass";
 	private int id;
 	private String nom;
@@ -23,7 +22,7 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public String toString(){
-		return this.className+"_"+this.id + "_" + this.nom + "_" + this.login + 
+		return Utilisateur.className+"_"+this.id + "_" + this.nom + "_" + this.login + 
 				"_" + this.password;
 	}
 	
