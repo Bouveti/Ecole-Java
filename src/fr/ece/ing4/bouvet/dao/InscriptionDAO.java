@@ -33,6 +33,24 @@ public class InscriptionDAO {
 		return listInscription;		
 	}
 	
+	public static Inscription getInscriptionById(int id) throws SQLException{
+		
+		inscription = new Inscription();
+		
+		String req ="SELECT * FROM Inscription WHERE id="+id+";";
+		DBAction.DBConnexion();
+		DBAction.setRes(DBAction.getStm().executeQuery(req));
+		while (DBAction.getRes().next())
+		{
+			inscription.setId(DBAction.getRes().getInt(1));
+			inscription.setEleve(DBAction.getRes().getInt(2));
+			inscription.setModule(DBAction.getRes().getInt(3));
+			inscription.setRole(DBAction.getRes().getString(4));
+		}
+		DBAction.DBClose();		
+		return inscription;
+	}
+	
 	public static int insertInscription(Inscription inscription){
 			
 			int result = -1;
