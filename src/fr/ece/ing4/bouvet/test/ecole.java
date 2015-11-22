@@ -62,48 +62,6 @@ public class ecole {
 	String resSplited;
 	String[] resFull;
 	ObjectInputStream ois = null;
-	
-	ArrayList<Utilisateur> listUser = new ArrayList<Utilisateur>();
-	ArrayList<Eleve> listEleve = new ArrayList<Eleve>();
-	ArrayList<Inscription> listInscriptions = new ArrayList<Inscription>();
-	ArrayList<Module> listModule = new ArrayList<Module>();
-	
-	
-	Specialite s1 = new Specialite(0, "SI");
-	Specialite s2 = new Specialite(1, "OCRES");
-	Specialite s3 = new Specialite(2, "Autres");
-
-	Module m1 = new Module(0, "SQL", 0);
-	Module m2 = new Module(1, "Reseau", 0);
-	Module m3 = new Module(2, "Java", 0);
-	Module m4 = new Module(3, "Web", 1);
-	Module m5 = new Module(4, "Anglais", 1);
-
-	Professeur p1 = new Professeur(0, "Darquier", 0, 0);
-	Professeur p2 = new Professeur(1, "Hermant", 1, 1);
-	Professeur p3 = new Professeur(2, "Lemon", 2, 1);
-	Professeur p4 = new Professeur(3, "Leonidas", 3, 0);
-	Professeur p5 = new Professeur(4, "Albukek", 4, 2);
-
-	Eleve el1 = new Eleve(0, "Paul", 0, 0);
-	Eleve el2 = new Eleve(1, "Alexis", 0, 1);
-	Eleve el3 = new Eleve(2, "Nicolas", 2, 0);
-	Eleve el4 = new Eleve(3, "Jean-Pierre", 3, 0);
-	Eleve el5 = new Eleve(4, "Logan", 3, 0);
-	Eleve el6 = new Eleve(5, "Roger", 2, 2);
-	Eleve el7 = new Eleve(6, "Fred", 1, 1);
-
-	Inscription in1 = new Inscription(0, 0, 0, "Etudiant", 1);
-	Inscription in2 = new Inscription(1, 0, 1, "Assistant", 1);
-	Inscription in3 = new Inscription(2, 0, 2, "Etudiant", 1);
-	Inscription in4 = new Inscription(3, 1, 4, "Etudiant", 1);
-	Inscription in5 = new Inscription(4, 2, 4, "Assistant", 1);
-	Inscription in6 = new Inscription(5, 1, 3, "Etudiant", 1);
-
-	// int id, int eleve, int module, int note, String type, float coefficient
-	Note n1 = new Note(0, 0, 0, 10, "DS", 5);
-	Note n2 = new Note(1, 0, 1, 14, "Partiel", 7);
-	Note n3 = new Note(2, 2, 4, 7, "TP", 2);
 
 	private ArrayList<Eleve> listeEleve = new ArrayList();
 	private ArrayList<Professeur> listeProfesseur = new ArrayList();
@@ -111,6 +69,7 @@ public class ecole {
 	private ArrayList<Note> listeNote = new ArrayList();
 	private ArrayList<Inscription> listeInscription = new ArrayList();
 	private ArrayList<Specialite> listeSpecialite = new ArrayList();
+	private ArrayList<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
 
 	// GLOBAL CLICKED
 	private Module clkdModule = null;
@@ -297,12 +256,13 @@ public class ecole {
 				if (clkdModule != null && clkdEleve != null) {
 					if (rdbtnAssistant.isSelected()) {
 						radioText = "Assistant";
-						Inscription i1 = new Inscription(listeInscription.size(), clkdEleve.getId(), clkdModule.getId(),
+						System.out.println(listeInscription.size());
+						Inscription i1 = new Inscription(listeInscription.get(listeInscription.size()-1).getId()+1, clkdEleve.getId(), clkdModule.getId(),
 								radioText, 1);
 						addInscription(i1);
 					} else if (rdbtnEleve.isSelected()) {
 						radioText = "Eleve";
-						Inscription i1 = new Inscription(listeInscription.size(), clkdEleve.getId(), clkdModule.getId(),
+						Inscription i1 = new Inscription(listeInscription.get(listeInscription.size()-1).getId()+1, clkdEleve.getId(), clkdModule.getId(),
 								radioText, 1);
 						addInscription(i1);
 					} else {
@@ -339,7 +299,7 @@ public class ecole {
 	protected void exitFunction() {
 		// TODO Auto-generated method stub
 		// C'est là qu'on envoit les données au serveur
-		System.out.println(this.s1.getNom());
+		System.out.println("Renvoi de la liste inscription : "+listeInscription.toString());
 	}
 
 	private void removeInscription() {
@@ -347,7 +307,6 @@ public class ecole {
 		this.displayInfoModule(indexEleve);
 
 	}
-
 	private void addInscription(Inscription i1) {
 		Boolean create = true;
 		for (int i = 0; i < listeInscription.size(); i++) {
@@ -364,7 +323,6 @@ public class ecole {
 	private void main() {
 		getResources();
 		setEleves();
-		setModules();
 		setSpecialites();
 		createMouseAdapter();
 	}
@@ -422,7 +380,6 @@ public class ecole {
 			}
 		}
 	}
-
 	private void setVariableClkdModuleEleve(int index) {
 		int j = 0;
 		for (int i = 0; i < listeInscription.size(); i++) {
@@ -444,10 +401,8 @@ public class ecole {
 		displayInfoEleve(index);
 		displayInfoModule(index);
 	}
-
 	private void displayModuleBySpe(int index) {
 		this.clkdSpec = listeSpecialite.get(index);
-		System.out.println(clkdSpec.getNom());
 		DefaultListModel dlmModules = new DefaultListModel();
 		int j = 0;
 		for (int i = 0; i < listeModule.size(); i++) {
@@ -459,7 +414,6 @@ public class ecole {
 		}
 		this.listModulesSpec.setModel(dlmModules);
 	}
-
 	private void displayInfoModule(int index) {
 		// TODO Auto-generated method stub
 		DefaultListModel dlmModules = new DefaultListModel();
@@ -477,7 +431,6 @@ public class ecole {
 		this.listeModules.setModel(dlmModules);
 		this.listModulesElevePNote.setModel(dlmModules);
 	}
-
 	private void displayInfoEleve(int index) {
 		this.lblReponseNom.setText(listeEleve.get(index).getNom());
 		this.lblReponseNomPNote.setText(listeEleve.get(index).getNom());
@@ -518,153 +471,100 @@ public class ecole {
 	private void getResources() {
 		// TODO Auto-generated method stub
 		try {
-			socket = new Socket(InetAddress.getLocalHost(), 2009);
-			InputStream is = socket.getInputStream();
+			//Cr�ation de la socketClient
+			socket = new Socket(InetAddress.getLocalHost(),3500);
+			InputStream is= socket.getInputStream();
 			ois = new ObjectInputStream(is);
+			//R�cup�ration + d�s�rialisation
 			try {
-				res = (String) ois.readObject().toString();
+				res=(String)ois.readObject().toString();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(res);
+			//S�paration des valeurs
 			res = res.replaceAll("]", "");
 			res = res.replaceAll("\\[", "");
 			res = res.replaceAll(" ", "");
 			resFull = res.split("[,_]");
-			/*
-			 * for (String resF : resFull) { System.out.println(resF); }
-			 */
-			for (int i = 0; i < resFull.length; i++) {
-				if (resFull[i].equalsIgnoreCase("EleveClass")) {
-					System.out.println(resFull[i + 1]);
-					listEleve.add(new Eleve(Integer.parseInt(resFull[i + 1]), resFull[i + 2],
-							Integer.parseInt(resFull[i + 3]), Integer.parseInt(resFull[i + 4])));
-				} else if (resFull[i].equalsIgnoreCase("UtilisateurClass")) {
-					System.out.println(resFull[i + 1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i + 1]), resFull[i + 2], resFull[i + 3],
-							resFull[i + 4]));
-				} else if (resFull[i].equalsIgnoreCase("UtilisateurClass")) {
-					System.out.println(resFull[i + 1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i + 1]), resFull[i + 2], resFull[i + 3],
-							resFull[i + 4]));
-				} else if (resFull[i].equalsIgnoreCase("InscriptionClass")) {
-					System.out.println(resFull[i + 1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i + 1]), resFull[i + 2], resFull[i + 3],
-							resFull[i + 4]));
-				} else if (resFull[i].equalsIgnoreCase("UtilisateurClass")) {
-					System.out.println(resFull[i + 1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i + 1]), resFull[i + 2], resFull[i + 3],
-							resFull[i + 4]));
+			/*for (String resF : resFull) {				
+				System.out.println(resF);
+			}*/
+			//Cr�ation des objets dans les arrayList
+			for(int i=0;i<resFull.length;i++)
+			{
+				if(resFull[i].equalsIgnoreCase("EleveClass"))
+				{
+					listeEleve.add(new Eleve(Integer.parseInt(resFull[i+1]), resFull[i+2],
+							Integer.parseInt(resFull[i+3]), Integer.parseInt(resFull[i+4])));
+				}
+				else if(resFull[i].equalsIgnoreCase("InscriptionClass"))
+				{
+					listeInscription.add(new Inscription(Integer.parseInt(resFull[i+1]),
+							Integer.parseInt(resFull[i+2]),
+							Integer.parseInt(resFull[i+3]),
+							resFull[i+4],
+							Integer.parseInt(resFull[i+5])));
+				}
+				else if(resFull[i].equalsIgnoreCase("ModuleClass"))
+				{
+					listeModule.add(new Module(Integer.parseInt(resFull[i+1]),
+							resFull[i+2],
+							Integer.parseInt(resFull[i+3])));
+				}
+				else if(resFull[i].equalsIgnoreCase("NoteClass"))
+				{
+					listeNote.add(new Note(Integer.parseInt(resFull[i+1]),
+							Integer.parseInt(resFull[i+2]),
+							Integer.parseInt(resFull[i+3]),
+							Integer.parseInt(resFull[i+4]),
+							resFull[i+5],
+							Float.parseFloat(resFull[i+6])));
+				}
+				else if(resFull[i].equalsIgnoreCase("ProfesseurClass"))
+				{
+					listeProfesseur.add(new Professeur(Integer.parseInt(resFull[i+1]),
+							resFull[i+2], 
+							Integer.parseInt(resFull[i+3]), 
+							Integer.parseInt(resFull[i+4])));
+				}
+				else if(resFull[i].equalsIgnoreCase("SpecialiteClass"))
+				{
+					listeSpecialite.add(new Specialite(Integer.parseInt(resFull[i+1]),
+							resFull[i+2]));
+				}
+				else if(resFull[i].equalsIgnoreCase("UtilisateurClass"))
+				{
+					listeUtilisateur.add(new Utilisateur(Integer.parseInt(resFull[i+1]),
+							resFull[i+2],
+							resFull[i+3],
+							resFull[i+4]));
 				}
 			}
-
-			// Utilisateur user2 = new Utilisateur(Integer.parseInt(resFull[0]),
-			// resFull[1], resFull[2], resFull[3]);
-
-			// System.out.println((Utilisateur)ois.readObject());
-
-			// ObjectInputStream ois = new ObjectInputStream(is);
-			/*
-			 * ois = new ObjectInputStream( new BufferedInputStream( new
-			 * FileInputStream( new File("game.txt"))));
-			 * 
-			 * try { System.out.println("Affichage de l'user :");
-			 * System.out.println("*************************\n");
-			 * System.out.println(ois.readObject().toString());
-			 * 
-			 * } catch (ClassNotFoundException e) { e.printStackTrace(); }
-			 * 
-			 * ois.close();
-			 */
-			System.out.println("close socket");
+			//Fermeture de la socket
 			socket.close();
+		}catch (UnknownHostException e) {
 
-		} catch (UnknownHostException e) {
-			// System.out.println("error 1");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// System.out.println("error 2");
+
 			e.printStackTrace();
 		}
-		getEleves();
-		getProfesseurs();
-		getInscription();
-		getModules();
-		getSpecialites();
 	}
-
-	private void getSpecialites() {
-		// TODO Auto-generated method stub
-		this.listeSpecialite.add(this.s1);
-		this.listeSpecialite.add(this.s2);
-		this.listeSpecialite.add(this.s3);
-	}
-
-	private void getModules() {
-		// TODO Auto-generated method stub
-		this.listeModule.add(this.m1);
-		this.listeModule.add(this.m2);
-		this.listeModule.add(this.m3);
-		this.listeModule.add(this.m4);
-		this.listeModule.add(this.m5);
-	}
-
-	private void getInscription() {
-		// TODO Auto-generated method stub
-		this.listeInscription.add(this.in1);
-		this.listeInscription.add(this.in2);
-		this.listeInscription.add(this.in3);
-		this.listeInscription.add(this.in4);
-		this.listeInscription.add(this.in5);
-		this.listeInscription.add(this.in6);
-	}
-
-	private void getProfesseurs() {
-		// TODO Auto-generated method stub
-		this.listeProfesseur.add(p1);
-		this.listeProfesseur.add(p2);
-		this.listeProfesseur.add(p3);
-		this.listeProfesseur.add(p4);
-		this.listeProfesseur.add(p5);
-	}
-
-	private void getEleves() {
-		// TODO Auto-generated method stub
-		this.listeEleve.add(el1);
-		this.listeEleve.add(el2);
-		this.listeEleve.add(el3);
-		this.listeEleve.add(el4);
-		this.listeEleve.add(el5);
-		this.listeEleve.add(el6);
-		this.listeEleve.add(el7);
-	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setSpecialites() {
-		// TODO Auto-generated method stub
 		DefaultListModel dlmSpecialites = new DefaultListModel();
 		for (int i = 0; i < this.listeSpecialite.size(); i++)
 			dlmSpecialites.add(i, listeSpecialite.get(i).getNom());
 		this.listSpecialites.setModel(dlmSpecialites);
-		System.out.println("setSpecialites");
 	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setEleves() {
-		// TODO Auto-generated method stub
 		DefaultListModel dlmEleves = new DefaultListModel();
 		for (int i = 0; i < this.listeEleve.size(); i++) {
 			dlmEleves.add(i, listeEleve.get(i).getNom());
 		}
 		this.listEleves.setModel(dlmEleves);
 		this.listElevePNote.setModel(dlmEleves);
-		System.out.println("setEleves");
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void setModules() {
-		// TODO Auto-generated method stub
-
 	}
 }
