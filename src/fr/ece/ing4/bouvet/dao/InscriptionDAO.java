@@ -55,7 +55,7 @@ public class InscriptionDAO {
 			return result;
 		}
 		
-		public static int deleteEtudiantById(Inscription inscription) {
+		public static int deleteInscriptionById(Inscription inscription) {
 			
 			int result = -1;
 			DBAction.DBConnexion();

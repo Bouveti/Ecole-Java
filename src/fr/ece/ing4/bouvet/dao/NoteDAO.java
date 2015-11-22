@@ -3,6 +3,7 @@ package fr.ece.ing4.bouvet.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import fr.ece.ing4.bouvet.beans.Inscription;
 import fr.ece.ing4.bouvet.beans.Note;
 import fr.ece.ing4.bouvet.connection.DBAction;
 
@@ -35,4 +36,28 @@ public class NoteDAO {
 		return listNote;		
 	}
 
+	public static int insertNote(Note note){
+		
+		int result = -1;
+		DBAction.DBConnexion();
+		
+		String req = "INSERT INTO NOTE (ID, ELEVE_IDELEVE, MODULE_IDMODULE, NOTE, TYPE, COEFFICIENT)VALUES("+ note.getId()+","
+																								+ note.getEleve()+","
+																								+ note.getModule()+","
+																								+ note.getNote()+",\""
+																								+ note.getType()+"\","
+																								+ note.getCoefficient()+");";
+		 
+		try {
+				result = DBAction.getStm().executeUpdate(req);
+				System.out.println("Requete executee");
+			 
+			} catch (SQLException ex) {
+				result = - ex.getErrorCode();
+			}
+		DBAction.DBClose();
+		
+		return result;
+	}
+	
 }
