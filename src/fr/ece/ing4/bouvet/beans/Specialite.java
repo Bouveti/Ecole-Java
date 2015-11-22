@@ -3,9 +3,6 @@ package fr.ece.ing4.bouvet.beans;
 import java.io.Serializable;
 
 public class Specialite implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final String className="SpecialiteClass";
 	private int id;

@@ -39,7 +39,7 @@ public class Server implements Serializable {
 		ArrayList<Note> Note = NoteDAO.getAllNote();
 		ArrayList<Professeur> Professeur = ProfesseurDAO.getAllProfesseur();
 		ArrayList<Specialite> Specialite = SpecialiteDAO.getAllSpecialite();
-		ArrayList<Utilisateur> Utilisateur = UtilisateurDAO.getAllUtilisateurs();		
+		ArrayList<Utilisateur> Utilisateur = UtilisateurDAO.getAllUtilisateurs();
 		ArrayList<Object> all = new ArrayList<Object>();
 		all.add(Eleve);
 		all.add(Inscription);

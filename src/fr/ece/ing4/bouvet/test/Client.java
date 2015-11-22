@@ -22,7 +22,7 @@ public class Client {
 		String res;
 		String[] resFull;
 		ObjectInputStream ois;
-		
+
 		ArrayList<Eleve> listEleve = new ArrayList<Eleve>();
 		ArrayList<Inscription> listInscription = new ArrayList<Inscription>();
 		ArrayList<Module> listModule = new ArrayList<Module>();
@@ -103,7 +103,7 @@ public class Client {
 		}catch (UnknownHostException e) {
 
 			e.printStackTrace();
-		}catch (IOException e) {
+		} catch (IOException e) {
 
 			e.printStackTrace();
 		}
