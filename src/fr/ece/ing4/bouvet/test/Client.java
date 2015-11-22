@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import fr.ece.ing4.bouvet.beans.Eleve;
 import fr.ece.ing4.bouvet.beans.Inscription;
 import fr.ece.ing4.bouvet.beans.Module;
+import fr.ece.ing4.bouvet.beans.Note;
+import fr.ece.ing4.bouvet.beans.Professeur;
+import fr.ece.ing4.bouvet.beans.Specialite;
 import fr.ece.ing4.bouvet.beans.Utilisateur;
 
 import java.io.*;
@@ -19,18 +22,18 @@ public class Client {
 
 		Socket socket;
 		String res;
-		String resSplited;
 		String[] resFull;
 		ObjectInputStream ois;
 		
-		ArrayList<Utilisateur> listUser = new ArrayList<Utilisateur>();
 		ArrayList<Eleve> listEleve = new ArrayList<Eleve>();
-		ArrayList<Inscription> listInscriptions = new ArrayList<Inscription>();
+		ArrayList<Inscription> listInscription = new ArrayList<Inscription>();
 		ArrayList<Module> listModule = new ArrayList<Module>();
-
+		ArrayList<Note> listNote = new ArrayList<Note>();
+		ArrayList<Professeur> listProfesseur = new ArrayList<Professeur>();
+		ArrayList<Specialite> listSpecialite = new ArrayList<Specialite>();
+		ArrayList<Utilisateur> listUtilisateur = new ArrayList<Utilisateur>();
 
 		try {
-
 			socket = new Socket(InetAddress.getLocalHost(),2009);
 			InputStream is= socket.getInputStream();
 			ois = new ObjectInputStream(is);
@@ -47,32 +50,37 @@ public class Client {
 			{
 				if(resFull[i].equalsIgnoreCase("EleveClass"))
 				{
-					System.out.println(resFull[i+1]);
 					listEleve.add(new Eleve(Integer.parseInt(resFull[i+1]), resFull[i+2],
 							Integer.parseInt(resFull[i+3]), Integer.parseInt(resFull[i+4])));
 				}
-				else if(resFull[i].equalsIgnoreCase("UtilisateurClass"))
-				{
-					System.out.println(resFull[i+1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i+1]), resFull[i+2],
-							resFull[i+3], resFull[i+4]));
-				}
-				else if(resFull[i].equalsIgnoreCase("UtilisateurClass"))
-				{
-					System.out.println(resFull[i+1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i+1]), resFull[i+2],
-							resFull[i+3], resFull[i+4]));
-				}
 				else if(resFull[i].equalsIgnoreCase("InscriptionClass"))
 				{
-					System.out.println(resFull[i+1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i+1]), resFull[i+2],
-							resFull[i+3], resFull[i+4]));
+					listInscription.add(new Inscription(Integer.parseInt(resFull[i+1]), Integer.parseInt(resFull[i+2]),
+							Integer.parseInt(resFull[i+3]), resFull[i+4], Integer.parseInt(resFull[i+5])));
+				}
+				else if(resFull[i].equalsIgnoreCase("ModuleClass"))
+				{
+					listModule.add(new Module(Integer.parseInt(resFull[i+1]), resFull[i+2],
+							Integer.parseInt(resFull[i+3])));
+				}
+				else if(resFull[i].equalsIgnoreCase("NoteClass"))
+				{
+					listNote.add(new Note(Integer.parseInt(resFull[i+1]), Integer.parseInt(resFull[i+2]),
+							Integer.parseInt(resFull[i+3]), Integer.parseInt(resFull[i+4]),
+							resFull[i+5], Float.parseFloat(resFull[i+6])));
+				}
+				else if(resFull[i].equalsIgnoreCase("ProfesseurClass"))
+				{
+					listProfesseur.add(new Professeur(Integer.parseInt(resFull[i+1]), resFull[i+2],
+							Integer.parseInt(resFull[i+3]), Integer.parseInt(resFull[i+4])));
+				}
+				else if(resFull[i].equalsIgnoreCase("SpecialiteClass"))
+				{
+					listSpecialite.add(new Specialite(Integer.parseInt(resFull[i+1]), resFull[i+2]));
 				}
 				else if(resFull[i].equalsIgnoreCase("UtilisateurClass"))
 				{
-					System.out.println(resFull[i+1]);
-					listUser.add(new Utilisateur(Integer.parseInt(resFull[i+1]), resFull[i+2],
+					listUtilisateur.add(new Utilisateur(Integer.parseInt(resFull[i+1]), resFull[i+2],
 							resFull[i+3], resFull[i+4]));
 				}
 			}

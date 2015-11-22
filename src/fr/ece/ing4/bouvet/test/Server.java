@@ -33,20 +33,18 @@ import fr.ece.ing4.bouvet.dao.UtilisateurDAO;
 
 public class Server implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	private static ServerSocket s;
 
 	public static void main(String[] args) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 
 		System.out.println("Lancement du serveur");
-		ServerSocket s = new ServerSocket(2009);
+		s = new ServerSocket(2009);
 		Socket connex = s.accept();
 		System.out.println("Hello T'es Co GG !");
 
-		ObjectInputStream ois;
+		//ObjectInputStream ois;
 		ObjectOutputStream oos;
 		
 		ArrayList<Eleve> Eleve = EleveDAO.getAllEleve();
@@ -65,7 +63,7 @@ public class Server implements Serializable {
 		all.add(Specialite);
 		all.add(Utilisateur);
 		
-		Utilisateur user = new Utilisateur(50,"aaaaa","aaaa@aaaa.com","password");
+		//Utilisateur user = new Utilisateur(50,"aaaaa","aaaa@aaaa.com","password");
 		try {
 			OutputStream os =  connex.getOutputStream();
 			oos = new ObjectOutputStream(os);
