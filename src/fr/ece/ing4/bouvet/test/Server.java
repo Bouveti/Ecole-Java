@@ -64,6 +64,7 @@ public class Server implements Serializable {
 		all.add(Professeur);
 		all.add(Specialite);
 		all.add(Utilisateur);
+		System.out.println("TETESTESTESTETSETSTSTESTS");
 		
 		Utilisateur user = new Utilisateur(50,"aaaaa","aaaa@aaaa.com","password");
 		try {
@@ -124,7 +125,7 @@ public class Server implements Serializable {
 		try {
 
 			socketduserveur = socketserver.accept(); 
-			System.out.println("Un zéro s'est connecté !");
+			System.out.println("Un zÃ©ro s'est connectÃ© !");
 		        socketserver.close();
 		        socketduserveur.close();
 
