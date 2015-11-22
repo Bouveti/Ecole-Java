@@ -304,17 +304,25 @@ public class ecole {
 		// C'est là qu'on envoit les données au serveur
 		System.out.println("Renvoi de la liste inscription : "+listeInscription.toString());
 		try {
-		    
-		    OutputStream os = socket.getOutputStream();
-		    ObjectOutputStream oos = new ObjectOutputStream(os);
-		    oos.writeObject(listeInscription);
-		    oos.close();
+			//S�rialisation de la list � envoyer
+			OutputStream os = socket.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			oos.writeObject(listeInscription);
+			oos.close();
 
-		   } catch (FileNotFoundException e) {
-		    e.printStackTrace();
-		   } catch (IOException e) {
-		    e.printStackTrace();
-		   }
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+				
+		//Fermeture de la socket
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void removeInscription() {
@@ -491,12 +499,8 @@ public class ecole {
 			InputStream is= socket.getInputStream();
 			ois = new ObjectInputStream(is);
 			//R�cup�ration + d�s�rialisation
-			try {
-				res=(String)ois.readObject().toString();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			res=(String)ois.readObject().toString();
+			System.out.println(res);
 			//S�paration des valeurs
 			res = res.replaceAll("]", "");
 			res = res.replaceAll("\\[", "");
@@ -556,13 +560,15 @@ public class ecole {
 							resFull[i+4]));
 				}
 			}
-			//Fermeture de la socket
-			socket.close();
+			
 		}catch (UnknownHostException e) {
 
 			e.printStackTrace();
 		} catch (IOException e) {
 
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
