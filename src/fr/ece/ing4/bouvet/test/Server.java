@@ -1,7 +1,11 @@
 package fr.ece.ing4.bouvet.test;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -30,7 +34,7 @@ public class Server implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static ServerSocket s;
 
-	public static void main(String[] args) throws IOException, SQLException {
+	public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
 
 		ObjectOutputStream oos;
 		ArrayList<Eleve> Eleve = EleveDAO.getAllEleve();
@@ -57,8 +61,19 @@ public class Server implements Serializable {
 				OutputStream os =  connex.getOutputStream();
 				oos = new ObjectOutputStream(os);
 				oos.writeObject(all);
-				oos.close();
-
+				oos.flush();
+				InputStream is= connex.getInputStream();
+				ObjectInputStream ois = new ObjectInputStream(is);
+				//Récupération + désérialisation
+				String res = (String)ois.readObject().toString();
+				System.out.println("res :"+res);
+				res = res.replaceAll("]", "");
+				res = res.replaceAll("\\[", "");
+				res = res.replaceAll(" ", "");
+				String[] resFull = res.split("[,_]");
+				/*for (String resF : resFull) {				
+					System.out.println(resF);
+				}*/
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

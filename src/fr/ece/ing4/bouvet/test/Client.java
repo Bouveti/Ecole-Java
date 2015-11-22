@@ -98,6 +98,19 @@ public class Client {
 							resFull[i+4]));
 				}
 			}
+			try {
+				//Sérialisation de la list à envoyer
+				OutputStream os = socket.getOutputStream();
+				ObjectOutputStream oos = new ObjectOutputStream(os);
+				oos.writeObject(listInscription);
+				oos.close();
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+					
 			//Fermeture de la socket
 			socket.close();
 		}catch (UnknownHostException e) {
