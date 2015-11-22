@@ -58,22 +58,50 @@ public class Server implements Serializable {
 		while(true){
 			Socket connex = s.accept();
 			try {
-				OutputStream os =  connex.getOutputStream();
-				oos = new ObjectOutputStream(os);
-				oos.writeObject(all);
-				oos.flush();
-				InputStream is= connex.getInputStream();
-				ObjectInputStream ois = new ObjectInputStream(is);
-				//Récupération + désérialisation
-				String res = (String)ois.readObject().toString();
-				System.out.println("res :"+res);
-				res = res.replaceAll("]", "");
-				res = res.replaceAll("\\[", "");
-				res = res.replaceAll(" ", "");
-				String[] resFull = res.split("[,_]");
-				/*for (String resF : resFull) {				
-					System.out.println(resF);
-				}*/
+					OutputStream os =  connex.getOutputStream();
+					oos = new ObjectOutputStream(os);
+					oos.writeObject(all);
+					oos.flush();
+					InputStream is= connex.getInputStream();
+					ObjectInputStream ois = new ObjectInputStream(is);
+					//Récupération + désérialisation
+					String res = (String)ois.readObject().toString();
+					System.out.println("res :"+res);
+					res = res.replaceAll("]", "");
+					res = res.replaceAll("\\[", "");
+					res = res.replaceAll(" ", "");
+					String[] resFull = res.split("[,_]");
+					/*for (String resF : resFull) {				
+						System.out.println(resF);
+					}*/
+					
+					for(int i=0;i<resFull.length;i++)
+					{
+						if(resFull[i].equalsIgnoreCase("InscriptionClass"))
+						{
+							Inscription.add(new Inscription(Integer.parseInt(resFull[i+1]),
+									Integer.parseInt(resFull[i+2]),
+									Integer.parseInt(resFull[i+3]),
+									resFull[i+4],
+									Integer.parseInt(resFull[i+5])));
+						}
+						
+						else if(resFull[i].equalsIgnoreCase("NoteClass"))
+						{
+							Note.add(new Note(Integer.parseInt(resFull[i+1]),
+									Integer.parseInt(resFull[i+2]),
+									Integer.parseInt(resFull[i+3]),
+									Integer.parseInt(resFull[i+4]),
+									resFull[i+5],
+									Float.parseFloat(resFull[i+6])));
+						}
+					}
+					
+					for(int i=0; i<Inscription.size();i++){
+						if (Inscription.get(i).getState() == 1)InscriptionDAO.insertInscription(Inscription.get(i));
+						else if(Inscription.get(i).getState() == -1)InscriptionDAO.deleteInscriptionById(Inscription.get(i));	
+					}
+					
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
