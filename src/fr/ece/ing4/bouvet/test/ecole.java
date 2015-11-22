@@ -26,9 +26,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.awt.event.ActionEvent;
@@ -300,6 +303,18 @@ public class ecole {
 		// TODO Auto-generated method stub
 		// C'est là qu'on envoit les données au serveur
 		System.out.println("Renvoi de la liste inscription : "+listeInscription.toString());
+		try {
+		    
+		    OutputStream os = socket.getOutputStream();
+		    ObjectOutputStream oos = new ObjectOutputStream(os);
+		    oos.writeObject(listeInscription);
+		    oos.close();
+
+		   } catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		   } catch (IOException e) {
+		    e.printStackTrace();
+		   }
 	}
 
 	private void removeInscription() {
