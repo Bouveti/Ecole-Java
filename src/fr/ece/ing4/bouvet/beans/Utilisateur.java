@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Utilisateur implements Serializable {
 	
-	private static final String className="Utilisateur";
+	private static final String className="UtilisateurClass";
 	private int id;
 	private String nom;
 	private String login;

@@ -1,6 +1,10 @@
 package fr.ece.ing4.bouvet.beans;
 
-public class Module {
+import java.io.Serializable;
+
+public class Module implements Serializable {
+	
+	private static final String className="ModuleClass";
 	private int id;
 	private String nom;
 	private int specialite;
@@ -14,6 +18,10 @@ public class Module {
 	
 	public Module(){
 		this(0,"",0);
+	}
+	
+	public String toString(){
+		return this.className+"_"+this.id + "_" + this.nom + "_" + this.specialite;
 	}
 
 	public int getId() {

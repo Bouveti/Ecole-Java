@@ -1,6 +1,10 @@
 package fr.ece.ing4.bouvet.beans;
 
-public class Inscription {
+import java.io.Serializable;
+
+public class Inscription implements Serializable {
+	
+	private static final String className="InscriptionClass";
 	private int id;
 	private int eleve;
 	private int module;
@@ -18,6 +22,11 @@ public class Inscription {
 	
 	public Inscription(){
 		this(0,0,0,"",0);
+	}
+	
+	public String toString(){
+		return this.className+"_"+this.id + "_" + this.eleve + "_" + this.module+ 
+				"_" + this.role + "_" + this.state;
 	}
 
 	public int getId() {
